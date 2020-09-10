@@ -244,7 +244,7 @@ public class Enemy_Behaviour : MonoBehaviour
                 posi2.y = transform.position.y;
                 desRotation = Quaternion.LookRotation(posi2 - transform.position);
                 
-                transform.rotation = Quaternion.Slerp(transform.rotation, desRotation, Time.deltaTime * 10);
+                transform.rotation = Quaternion.Slerp(transform.rotation, desRotation, Time.deltaTime * 6f);
 
 
                 state = 1;
@@ -253,7 +253,7 @@ public class Enemy_Behaviour : MonoBehaviour
             case 1:
 
                 
-                transform.rotation = Quaternion.Slerp(transform.rotation, desRotation, Time.deltaTime * 10);
+                transform.rotation = Quaternion.Slerp(transform.rotation, desRotation, Time.deltaTime * 6f);
 
                 posi = (destinateposi - transform.position);
 
@@ -277,7 +277,7 @@ public class Enemy_Behaviour : MonoBehaviour
 
                 break;
             case 2:
-                if (cnt < 540)
+                if (cnt < 240)
                 {
 
 

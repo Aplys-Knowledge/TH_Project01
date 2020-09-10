@@ -89,7 +89,7 @@ public class PrimitiveChara : AChara
                 isGuard = false;
                 v = Input.GetAxis("Vertical");
                 h = 0f;
-                h2 = Input.GetAxis("Horizontal");
+                h2 = Input.GetAxis("Horizontal") * 2.8f;
 
             }
 
@@ -105,10 +105,10 @@ public class PrimitiveChara : AChara
 
         if (Input_Mgr.Get_Battered(KeyCode.W))
         {
-
+            
             if (fa == false)
             {
-                StartCoroutine(Accel2(false));
+                StartCoroutine(Accel3(0));
             }
         }
 
@@ -117,9 +117,27 @@ public class PrimitiveChara : AChara
             
             if (fa == false)
             {
-                StartCoroutine(Accel2(true));
+                StartCoroutine(Accel3(1));
             }
         }
+
+        if (Input_Mgr.Get_Battered(KeyCode.D))
+        {
+            if (fa == false)
+            {
+                StartCoroutine(Accel3(2));
+            }
+        }
+
+        if (Input_Mgr.Get_Battered(KeyCode.A))
+        {
+            if (fa == false)
+            {
+                StartCoroutine(Accel3(3));
+            }
+        }
+
+
 
 
         //Accelerate(back);
@@ -252,6 +270,8 @@ public class PrimitiveChara : AChara
     }
 
     bool fa = false;
+
+    /*
     IEnumerator Accel2(bool back)
     {
         //Debug.Log("s");
@@ -277,6 +297,47 @@ public class PrimitiveChara : AChara
         fa = false;
 
     }
+    */
+
+    IEnumerator Accel3(int rot)
+    {
+        
+        for (int i = 0; i < 30; i++)
+        {
+
+            
+            fa = true;
+            if (rot == 0)
+            {
+                v = 3f;
+            }
+            if (rot == 1)
+            {
+                v = -2.7f;
+            }
+            if (rot == 2)
+            {
+                v = 0f;
+                h = 2f;
+            }
+            if (rot == 3)
+            {
+                v = 0f;
+                h = -2f;
+            }
+
+            yield return null;
+        }
+
+        fa = false;
+
+    }
+
+
+
+
+
+
 
     private void SetV(float speed)
     {

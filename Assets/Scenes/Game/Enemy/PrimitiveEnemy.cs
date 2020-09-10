@@ -31,6 +31,9 @@ public class PrimitiveEnemy : AEnemy
 
     private CharacterController _characterController;
 
+    protected bool fap = true;      //出現動作中かどうか
+
+
 
 
     protected override void Ini()
@@ -52,14 +55,42 @@ public class PrimitiveEnemy : AEnemy
 
     }
 
+    protected IEnumerator Appear()
+    {
+
+        for (int i = 0; i < 60; i++)
+        {
+            fap = true;
+            Quaternion rot = Quaternion.LookRotation(transform.right);
+            if (i < 20)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 18f);
+            }
+            if (i >= 20 && i < 40)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 15f);
+            }
+            if (i >= 40 && i < 60)
+            {
+                transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 10f);
+            }
+
+
+            yield return null;
+        }
+        fap = false;
+
+    }
+
 
     protected override void Move()
     {
 
 
-        
-        Ebehaviour.move[behaviour].MoveFunc(onEnemy);
-
+        if (fap == false)
+        {
+            Ebehaviour.move[behaviour].MoveFunc(onEnemy);
+        }
 
     }
 
@@ -71,7 +102,7 @@ public class PrimitiveEnemy : AEnemy
         shotposi.y += 0.5f;
 
 
-        sbullet.ShotH[shot_knd].ShotFunc(shotposi, targetRotation);
+        sbullet.ShotH[shot_knd].ShotFunc(shotposi);
 
 
 
@@ -99,13 +130,13 @@ public class PrimitiveEnemy : AEnemy
     private int state = 0;
     private int cnt = 0;
 
-    protected void OnEncount()
+    protected virtual void OnEncount()
     {
         Vector3 posi;
         Vector3 posi2;
         Vector3 charaV;
 
-        if (onEnemy)
+        if (onEnemy == true && fap == false)
         {
 
             targetRotation = Quaternion.LookRotation(stage.player_position - transform.position);
@@ -155,10 +186,10 @@ public class PrimitiveEnemy : AEnemy
 
                     break;
                 case 2:
-                    if (cnt < 540)
+                    if (cnt < 240)
                     {
 
-
+                        Shot();
                         cnt++;
                     }
                     else

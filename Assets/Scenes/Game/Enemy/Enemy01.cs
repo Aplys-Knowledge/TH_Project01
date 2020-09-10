@@ -16,6 +16,7 @@ public class Enemy01 : PrimitiveEnemy
 
 
         Ini();
+        StartCoroutine("Appear");
 
         behaviour = enemy.PBehaviour;
         shot_knd = enemy.PShot;

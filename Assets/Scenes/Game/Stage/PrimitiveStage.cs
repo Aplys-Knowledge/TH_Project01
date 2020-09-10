@@ -48,7 +48,10 @@ public class PrimitiveStage : AStage
 
     }
 
-
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
 
 
 

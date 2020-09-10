@@ -31,7 +31,7 @@ public class Input_Mgr : MonoBehaviour
         if (flag == true)
         {
             t++;
-            if (t <= 100 && t > 3)
+            if (t <= 45 && t > 3)
             {
                 if (Input.GetKeyDown(code))
                 {
@@ -42,7 +42,7 @@ public class Input_Mgr : MonoBehaviour
                 }
             }
 
-            if (t > 100)
+            if (t > 45)
             {
                 flag = false;
                 t = 0;
