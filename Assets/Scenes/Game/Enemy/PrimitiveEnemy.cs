@@ -8,6 +8,8 @@ public class PrimitiveEnemy : AEnemy
 
     protected int flag = 0;
     protected int behaviour;
+    protected int enc_behaviour;
+
     protected int shot_knd;
     protected int HP;
     protected int item;
@@ -32,6 +34,9 @@ public class PrimitiveEnemy : AEnemy
     private CharacterController _characterController;
 
     protected bool fap = true;      //出現動作中かどうか
+
+    private bool fmcrt = true;      //通常動作コルーチンを開始するどうか
+    private bool fecrt = false;     //エンカ動作コルーチンを開始するかどうか
 
 
 
@@ -90,24 +95,23 @@ public class PrimitiveEnemy : AEnemy
         if (fap == false)
         {
             Ebehaviour.move[behaviour].MoveFunc(onEnemy);
+            
+
         }
 
-    }
 
-    protected void Shot()
-    {
-        Vector3 shotposi;
-
-        shotposi = transform.position;
-        shotposi.y += 0.5f;
-
-
-        sbullet.ShotH[shot_knd].ShotFunc(shotposi);
-
-
+        if (fap == false)
+        {
+            if (fmcrt == true && onEnemy == false)
+            {
+                StartCoroutine(Ebehaviour.move2[0]());
+            }
+        }
 
 
     }
+
+    
 
 
 
@@ -125,119 +129,41 @@ public class PrimitiveEnemy : AEnemy
 
     }
 
-    private Vector3 destinateposi;
-    private Quaternion desRotation;
-    private int state = 0;
-    private int cnt = 0;
+    private bool flag2 = true;
+    
+
+
 
     protected virtual void OnEncount()
     {
-        Vector3 posi;
-        Vector3 posi2;
-        Vector3 charaV;
+        
 
         if (onEnemy == true && fap == false)
         {
+            Ebehaviour.enc_move[enc_behaviour]();
 
-            targetRotation = Quaternion.LookRotation(stage.player_position - transform.position);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10);
-            //Shot();
-
-            switch (state)
+            /*
+            if (flag2 == true)
             {
-                case 0:
-
-                    while (onEnemy)
-                    {
-                        destinateposi = new Vector3(Random.Range((transform.position.x - 10f), (transform.position.x + 10f)), transform.position.y, Random.Range((transform.position.z - 10f), (transform.position.z + 10f)));
-
-                        if (Vector3.Distance(stage.player_position, destinateposi) > 10f && Vector3.Distance(stage.player_position, destinateposi) < 18f)
-                        {
-                            
-                            state = 1;
-                            break;
-                            
-                        }
-                        
-
-                    }
-
-                    
-                    
-                    state = 1;
-
-                    break;
-                case 1:
-
-                    posi = (destinateposi - transform.position);
-
-                    charaV = Vector3.Normalize(posi);
-
-                    _characterController.Move(charaV * Time.deltaTime * 2f);
-                    
-
-
-
-                    if(Vector3.Distance(transform.position, destinateposi) < 1.0f)
-                    {
-                        state = 2;
-                    }
-                    
-
-                    break;
-                case 2:
-                    if (cnt < 240)
-                    {
-
-                        Shot();
-                        cnt++;
-                    }
-                    else
-                    {
-
-                        
-                        cnt = 0;
-                        state = 0;
-                    }
-
-
-                    break;
+                StartCoroutine(Ebehaviour.move2[0](false));
+                flag2 = false;
             }
-
-
-            //Debug.Log(Vector3.Distance(transform.position, destinateposi));
-
-            //Debug.Log(state);
+            */
 
             
-            
 
-            //弾幕の処理
 
 
         }
         else
         {
-
-
+            flag2 = true;
+            
 
         }
 
 
     }
-
-    protected void EncountBehaviour()
-    {
-
-
-
-
-
-
-
-
-    }
-
 
 
 
@@ -258,6 +184,11 @@ public class PrimitiveEnemy : AEnemy
         set { behaviour = value; }
     }
 
+    public int PEnc_behaviour
+    {
+        get { return enc_behaviour; }
+        set { enc_behaviour = value; }
+    }
 
     public int PShot
     {
@@ -294,6 +225,24 @@ public class PrimitiveEnemy : AEnemy
     public Vector3 PRotate
     {
         set { rota = value; }
+    }
+
+    public bool Enc_flag
+    {
+        get { return onEnemy; }
+        set { onEnemy = value; }
+
+    }
+
+    public bool mcrt
+    {
+
+        set { fmcrt = value; }
+    }
+
+    public bool ecrt
+    {
+        set { fecrt = value; }
     }
 
 

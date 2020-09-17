@@ -10,10 +10,18 @@ public struct Enemy_Data
     public Quaternion rotation;
 
     public float x2;
+    public float y2;
     public float z2;
+
+    public float range;
+
+    public int Ap_form;
 
     public int knd;
     public int behaviour;
+
+    public int enc_move;
+
     public int shot_num;
 
     public int flag;

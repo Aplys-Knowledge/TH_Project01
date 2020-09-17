@@ -38,7 +38,12 @@ public class Enemy01 : PrimitiveEnemy
         {
             Move();
             DetectPlayer();
+            enemy.Enc_flag = onEnemy;
+
             OnEncount();
+            
+
+
         }
 
     }

@@ -60,32 +60,128 @@ public class Enemy_Mgr : MonoBehaviour
             {
 
                 Vector3 ter = new Vector3(data_in.Get_Enemy_Data(i).x2, 0, data_in.Get_Enemy_Data(i).z2);
+                switch (data_in.Get_Enemy_Data(i).Ap_form)
+                {
+                    case 0:
+                        if (Mathf.Abs(chara.x - data_in.Get_Enemy_Data(i).x2) < data_in.Get_Enemy_Data(i).range)
+                        {
 
-                if (Vector3.Distance(chara, ter) < 20)
-                { 
-                    
-                    
-                    enemy_cs[i] = Instantiate(knd[data_in.Get_Enemy_Data(i).knd], data_in.Get_Enemy_Data(i).position, data_in.Get_Enemy_Data(i).rotation).GetComponent<PrimitiveEnemy>();
-                    enemy_flag[i] = 1;
 
-                    //enemy_cs[i].Set_Enemy(data_in.Get_Enemy_Data(i).behaviour, data_in.Get_Enemy_Data(i).shot_num, data_in.Get_Enemy_Data(i).HP, data_in.Get_Enemy_Data(i).item, 0);
+                            enemy_cs[i] = Instantiate(knd[data_in.Get_Enemy_Data(i).knd], data_in.Get_Enemy_Data(i).position, data_in.Get_Enemy_Data(i).rotation).GetComponent<PrimitiveEnemy>();
+                            enemy_flag[i] = 1;
 
-                    
-                    
 
-                    
-                    enemy_cs[i].PBehaviour = data_in.Get_Enemy_Data(i).behaviour;
-                    enemy_cs[i].PShot = data_in.Get_Enemy_Data(i).shot_num;
-                    enemy_cs[i].PItem = data_in.Get_Enemy_Data(i).item;
-                    
 
+
+
+                            enemy_cs[i].PBehaviour = data_in.Get_Enemy_Data(i).behaviour;
+                            enemy_cs[i].PEnc_behaviour = data_in.Get_Enemy_Data(i).enc_move;
+                            enemy_cs[i].PShot = data_in.Get_Enemy_Data(i).shot_num;
+                            enemy_cs[i].PItem = data_in.Get_Enemy_Data(i).item;
+
+
+
+                        }
+
+                        break;
+                    case 1:
+                        if (Mathf.Abs(chara.y - data_in.Get_Enemy_Data(i).y2) < data_in.Get_Enemy_Data(i).range)
+                        {
+
+
+                            enemy_cs[i] = Instantiate(knd[data_in.Get_Enemy_Data(i).knd], data_in.Get_Enemy_Data(i).position, data_in.Get_Enemy_Data(i).rotation).GetComponent<PrimitiveEnemy>();
+                            enemy_flag[i] = 1;
+
+
+
+
+
+                            enemy_cs[i].PBehaviour = data_in.Get_Enemy_Data(i).behaviour;
+                            enemy_cs[i].PEnc_behaviour = data_in.Get_Enemy_Data(i).enc_move;
+                            enemy_cs[i].PShot = data_in.Get_Enemy_Data(i).shot_num;
+                            enemy_cs[i].PItem = data_in.Get_Enemy_Data(i).item;
+
+
+
+                        }
+
+
+                        break;
+                    case 2:
+                        if (Mathf.Abs(chara.z - data_in.Get_Enemy_Data(i).z2) < data_in.Get_Enemy_Data(i).range)
+                        {
+
+
+                            enemy_cs[i] = Instantiate(knd[data_in.Get_Enemy_Data(i).knd], data_in.Get_Enemy_Data(i).position, data_in.Get_Enemy_Data(i).rotation).GetComponent<PrimitiveEnemy>();
+                            enemy_flag[i] = 1;
+
+
+
+
+
+                            enemy_cs[i].PBehaviour = data_in.Get_Enemy_Data(i).behaviour;
+                            enemy_cs[i].PEnc_behaviour = data_in.Get_Enemy_Data(i).enc_move;
+                            enemy_cs[i].PShot = data_in.Get_Enemy_Data(i).shot_num;
+                            enemy_cs[i].PItem = data_in.Get_Enemy_Data(i).item;
+
+
+
+                        }
+
+                        break;
+                    case 3:
+                        
+
+                        if (Vector3.Distance(chara, ter) < data_in.Get_Enemy_Data(i).range)
+                        {
+
+
+                            enemy_cs[i] = Instantiate(knd[data_in.Get_Enemy_Data(i).knd], data_in.Get_Enemy_Data(i).position, data_in.Get_Enemy_Data(i).rotation).GetComponent<PrimitiveEnemy>();
+                            enemy_flag[i] = 1;
+
+
+
+
+
+                            enemy_cs[i].PBehaviour = data_in.Get_Enemy_Data(i).behaviour;
+                            enemy_cs[i].PEnc_behaviour = data_in.Get_Enemy_Data(i).enc_move;
+                            enemy_cs[i].PShot = data_in.Get_Enemy_Data(i).shot_num;
+                            enemy_cs[i].PItem = data_in.Get_Enemy_Data(i).item;
+
+
+
+                        }
+
+                        break;
+                    case 4:
+                        ter = new Vector3(data_in.Get_Enemy_Data(i).x2, data_in.Get_Enemy_Data(i).y2, data_in.Get_Enemy_Data(i).z2);
+
+                        if (Vector3.Distance(chara, ter) < data_in.Get_Enemy_Data(i).range)
+                        {
+
+
+                            enemy_cs[i] = Instantiate(knd[data_in.Get_Enemy_Data(i).knd], data_in.Get_Enemy_Data(i).position, data_in.Get_Enemy_Data(i).rotation).GetComponent<PrimitiveEnemy>();
+                            enemy_flag[i] = 1;
+
+
+
+
+
+                            enemy_cs[i].PBehaviour = data_in.Get_Enemy_Data(i).behaviour;
+                            enemy_cs[i].PEnc_behaviour = data_in.Get_Enemy_Data(i).enc_move;
+                            enemy_cs[i].PShot = data_in.Get_Enemy_Data(i).shot_num;
+                            enemy_cs[i].PItem = data_in.Get_Enemy_Data(i).item;
+
+
+
+                        }
+
+
+                        break;
 
                 }
+
             }
-
-
-
-
         }
     }
 

@@ -28,7 +28,8 @@ public class Data_Input : MonoBehaviour
     void Start()
     {
         path[0] = "/Data/test/Test.csv";
-        path[1] = "/Data/test/test02.csv";
+        path[1] = "/Data/Enemy/R01.csv";
+        path[2] = "/Data/test/test03.csv";
 
         event_path[0] = "/Data/test/event91.csv";
 
@@ -51,53 +52,84 @@ public class Data_Input : MonoBehaviour
                 if (cnt > 0)
                 {
                     string[] d = text.Split(',');
-                    for (int i = 0; i < 11; i++)
+                    for (int i = 0; i < 15; i++)
                     {
                         switch (i)
                         {
                             case 0:
+                                //x座標インプット
                                 e_data[(cnt - 1)].position.x = float.Parse(d[i]);
                                 break;
                             case 1:
+                                //y座標インプット
                                 e_data[(cnt - 1)].position.y = float.Parse(d[i]);
                                 break;
                             case 2:
+                                //z座標インプット
                                 e_data[(cnt - 1)].position.z = float.Parse(d[i]);
                                 break;
                             case 3:
-                                if (int.Parse(d[i]) == 1)
-                                {
+                                //角度インプット
 
-                                    e_data[(cnt - 1)].rotation = Quaternion.identity;
-
-                                }
-
+                                e_data[(cnt - 1)].rotation = Quaternion.identity * Quaternion.AngleAxis(float.Parse(d[i]), Vector3.up);
 
                                 break;
                             case 4:
+
+
                                 e_data[(cnt - 1)].x2 = float.Parse(d[i]);
 
                                 break;
                             case 5:
-                                e_data[(cnt - 1)].z2 = float.Parse(d[i]);
+
+
+                                e_data[(cnt - 1)].y2 = float.Parse(d[i]);
 
                                 break;
                             case 6:
-                                e_data[(cnt - 1)].knd = int.Parse(d[i]);
+
+
+                                e_data[(cnt - 1)].z2 = float.Parse(d[i]);
                                 break;
                             case 7:
-                                e_data[(cnt - 1)].behaviour = int.Parse(d[i]);
+
+
+                                e_data[(cnt - 1)].range = float.Parse(d[i]);
                                 break;
                             case 8:
-                                e_data[(cnt - 1)].shot_num = int.Parse(d[i]);
+
+                                e_data[(cnt - 1)].Ap_form = int.Parse(d[i]);
                                 break;
                             case 9:
-                                e_data[(cnt - 1)].HP = int.Parse(d[i]);
+
+
+                                e_data[(cnt - 1)].knd = int.Parse(d[i]);
                                 break;
                             case 10:
+
+
+                                e_data[(cnt - 1)].behaviour = int.Parse(d[i]);
+                                break;
+                            case 11:
+                                e_data[(cnt - 1)].enc_move = int.Parse(d[i]);
+
+                                break;
+                            case 12:
+
+
+                                e_data[(cnt - 1)].shot_num = int.Parse(d[i]);
+                                break;
+                            case 13:
+
+
+                                e_data[(cnt - 1)].HP = int.Parse(d[i]);
+                                break;
+                            case 14:
+
+
                                 e_data[(cnt - 1)].item = int.Parse(d[i]);
                                 break;
-
+                           
 
                         }
                     }
